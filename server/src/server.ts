@@ -1,7 +1,10 @@
 const forceDatabaseRefresh = false;
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
-import sequelize from './config/connection.js';
+import { sequelize } from './models/index.js';
 import routes from './routes/index.js';
 
 const app = express();
