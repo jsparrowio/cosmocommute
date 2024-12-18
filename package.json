@@ -25,6 +25,7 @@
     "wait-on": "^7.2.0"
   },
   "dependencies": {
+    "antd": "^5.22.5",
     "typescript": "^5.7.2"
   }
 }

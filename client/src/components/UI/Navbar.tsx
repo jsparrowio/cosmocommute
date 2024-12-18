@@ -11,6 +11,8 @@ const Navbar: React.FC = () => {
             </ul>
         </nav>
     )
+
+    
 };
 
 export default Navbar;
