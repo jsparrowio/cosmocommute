@@ -8,6 +8,9 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import Nav from './components/Nav';
 import { Layout } from 'antd'
+import TrafficPage from './pages/TrafficPage';
+import WeatherPage from './pages/WeatherPage';
+import UserSettingsPage from './pages/UserSettingsPage';
 
 // function to render entire React single page application
 const { Header, Footer, Sider, Content } = Layout;
@@ -61,6 +64,9 @@ const App: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/Login" element={<LoginPage />} />
             <Route path="/Dashboard" element={<DashboardPage />} />
+            <Route path="/Traffic" element={<TrafficPage />} />
+            <Route path="/Weather" element={<WeatherPage />} />
+            <Route path="/UserSettings" element={<UserSettingsPage />} />
           </Routes>
         </Content>
         <Footer style = {footerStyle}>
