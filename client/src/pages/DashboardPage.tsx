@@ -38,6 +38,7 @@ const DashboardPage = () => {
     if (error) return <div>Error: {error}</div>;
 
     return (
+      <div>
         <div className="dashboard">
             <h1>Astronomy Picture of the Day</h1>
             {apodData && (
