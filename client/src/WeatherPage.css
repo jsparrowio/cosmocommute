@@ -1,12 +1,27 @@
 .weather-event {
-    text-align: center;
     line-height: normal;
     padding: 2rem;
     color: #333;
   }
-  
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+  }
+
+  .start-date,
+  .peak-time,
+  .end-date {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
   .weather-event-container {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 2rem auto;
     padding: 1.5rem;
     border-radius: 8px;
@@ -19,12 +34,6 @@
     font-weight: bold;
     line-height: 1.5;
     margin-bottom: 1rem;
-  }
-  .weather-event p {
-    font-size: 1rem;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    text-align: center;
   }
 
   .error {
