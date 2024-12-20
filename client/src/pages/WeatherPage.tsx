@@ -60,10 +60,15 @@ const WeatherPage = () => {
         {events.map((event, index) => (
           <div key={index} className="card">
             <h2>Solar Flare</h2>
-            <p><strong>Start Date:</strong> {new Date(event.beginTime).toLocaleString()}</p>
-            <p><strong>Peak Time:</strong> {new Date(event.peakTime).toLocaleString()}</p>
-            <p><strong>End Date:</strong> {new Date(event.endTime).toLocaleString()}</p>
-            <img src={solarFlareImage} alt="Solar Flare" style={{ width: '90%', borderRadius: '10px' }} />
+            <p className="start-date"><strong>Start Date:</strong> {new Date(event.beginTime).toLocaleString()}</p>
+            <p className="peak-time"><strong>Peak Time:</strong> {new Date(event.peakTime).toLocaleString()}</p>
+            <p className="end-date"><strong>End Date:</strong> {new Date(event.endTime).toLocaleString()}</p>
+            <p className="description">A solar flare is a sudden, intense burst of energy and radiation originating from the Sun's surface 
+              and outer atmosphere. It occurs when magnetic energy stored in the Sun's atmosphere is released, often 
+              associated with sunspots or active regions. This release of energy causes a variety of effects, 
+              including the emission of X-rays, ultraviolet radiation, and energetic particles. Solar flares can 
+              affect space weather, including satellite communications, GPS systems, and power grids on Earth.</p>
+            <img src={solarFlareImage} alt="Solar Flare" style={{ width: '100%', borderRadius: '10px' }} />
             {/* Display other event details as needed */}
           </div>
         ))}

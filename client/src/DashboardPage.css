@@ -1,34 +1,46 @@
 .dashboard {
-    line-height: normal;
+    display: flex;
+    flex-direction: row; /* APOD on the left, traffic/weather on the right */
     padding: 2rem;
     color: #333;
-    display: flex;
-    flex-direction: row; /* Align items in a row */
-    justify-content: space-between; /* Space out the APOD and additional containers */
-    gap: 2rem; /* Add gap between the APOD and right pane */
+    gap: 2rem; /* Space between APOD and right pane */
+    justify-content: flex-start; /* Align content to the left */
+    align-items: flex-start; /* Align items at the top */
+    margin: auto;
 }
 
 .apod-container {
-    flex: 3; /* Take up more space for the APOD container */
-    max-width: 1200px;
-    margin-right: 5rem;
+    flex: 2;
+    max-width: 1300px;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #f0f8ff;
+    min-height: 500px; /* Ensure a consistent minimum height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Fill the available height */
 }
 
 .apod-container h1 {
     font-weight: bold;
     line-height: 1.5;
-    margin-bottom: 1rem;
+    text-align: center;
 }
 
-.apod-container p {
+.explanation {
     font-size: 1rem;
     line-height: 1.8;
     margin-bottom: 1.5rem;
-    text-align: justify;
+    text-align: justify; /* Justify explanation for better readability */
+}
+
+.title, 
+.date {
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.8;
 }
 
 .apod-container img {
@@ -36,31 +48,36 @@
     height: auto;
     border-radius: 8px;
     margin-bottom: 1.5rem;
+    object-fit: contain; /* Ensure the image fits within the container */
 }
 
 .right-pane {
-    flex: 1; /* Smaller space for the traffic and weather containers */
+    flex: 1; /* Right pane takes up less space */
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; /* Space between the containers */
-    margin: 20px;
+    gap: 1.5rem; /* Space between traffic and weather containers */
+    align-items: center; /* Align right pane items to the center */
+    justify-content: space-between; /* Space between traffic and weather containers */
+    height: 100%; /* Fill the available height */
 }
 
 .dashboard-traffic,
 .dashboard-weather {
     text-align: center;
-    background-color: #ffffff;
+    background-color: #f0f8ff;
     padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     line-height: 1.5;
-    margin-bottom: 1.5rem; /* Space between containers */
     max-width: 500px; /* Set a max width to make them smaller */
-    height: auto; /* Allow height to adjust based on content */
-    margin-left: 5rem; /* Center horizontally */
-    margin-right: auto; /* Center horizontally */
+    font-size: large;
+    margin: 0 auto; /* Center the containers horizontally */
 }
 
+.dashboard-traffic:hover,
+.dashboard-weather:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
 .dashboard-traffic img,
 .dashboard-weather img {
     max-width: 100%; /* Ensure images don't overflow */
@@ -72,4 +89,88 @@
 .dashboard-traffic h3,
 .dashboard-weather h3 {
     margin-bottom: 0.5rem;
+    margin-top: 0;
+    font-size: 2rem;
+}
+
+.settings-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #23ed61, #2ce6ed); 
+    color: #ff29f9;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px; /* Round the corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: auto;
+}
+
+.settings-button:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.settings-button:focus {
+    outline: none; /* Remove focus outline */
+}
+
+.settings-button:active {
+    transform: scale(0.95); /* Slightly shrink on click */
+}
+
+/* Icon Styling */
+.settings-icon {
+    margin-right: 0.5rem; /* Space between icon and text */
+    font-size: 1.5rem; /* Adjust size as needed */
+}
+
+/* Responsive Styles */
+
+/* For tablets and smaller screens */
+@media (max-width: 1024px) {
+    .dashboard {
+        flex-direction: column; /* Stack the containers vertically on smaller screens */
+        padding: 1rem;
+    }
+
+    .apod-container {
+        flex: 1; /* APOD container takes equal space on smaller screens */
+        margin-bottom: 2rem; /* Add space below the APOD container */
+    }
+
+    .right-pane {
+        flex: 1;
+    }
+
+    .dashboard-traffic,
+    .dashboard-weather {
+        max-width: 90%; /* Make traffic and weather containers take up more width */
+    }
+}
+
+/* For mobile screens */
+@media (max-width: 600px) {
+    .dashboard {
+        flex-direction: column; /* Stack the containers vertically */
+        padding: 1rem;
+    }
+
+    .apod-container {
+        flex: 1; /* APOD container takes equal space on mobile */
+        margin-bottom: 1.5rem; /* Add space below the APOD container */
+    }
+
+    .right-pane {
+        flex: 1;
+    }
+
+    .dashboard-traffic,
+    .dashboard-weather {
+        max-width: 100%; /* Ensure traffic and weather containers take full width */
+    }
 }
