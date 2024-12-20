@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 // jwt payload interface, which contains user data
 interface JwtPayload {
   username: string;
+  first_name: string;
 }
 
 // export authenticateToken middleware, which checks validates the token against the secret key for validity, or responds a 403 forbidden

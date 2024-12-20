@@ -23,10 +23,18 @@ export const login = async (req: Request, res: Response) => {
     return res.status(401).json({ message: 'Username or Password incorrect' });
   }
 
+  const userData ={
+    id: user.id,
+    username: username,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    email: user.email
+  }
+
   const secretKey = process.env.JWT_SECRET_KEY || '';
 
   // sign the token using jwt functions that is validated with the secret key we provide in our env
-  const token = jwt.sign({ username }, secretKey, { expiresIn: '1hr' });
+  const token = jwt.sign({ userData }, secretKey, { expiresIn: '1hr' });
   return res.json({ token })
 };
 

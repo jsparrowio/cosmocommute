@@ -42,13 +42,16 @@ class AuthService {
   login(idToken: string) {
     // set the token to localStorage 
     localStorage.setItem('id_token', idToken);
+    const userInfo = JSON.stringify(jwtDecode<UserData>(idToken));
+    localStorage.setItem('user_info', userInfo);
     // redirect to the home page
-    window.location.assign('/');
+    window.location.assign('/dashboard');
   }
 
   logout() {
     // remove the token from localStorage
     localStorage.removeItem('id_token');
+    localStorage.removeItem('user_info');
     // redirect to the login page
     window.location.assign('/');
   }
