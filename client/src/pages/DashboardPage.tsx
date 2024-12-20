@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { fetchAstronomyPicture } from '../apis/apodAPI';
 import '../DashboardPage.css';
+import trafficImage from '../assets/traffic.jpg';
+import weatherImage from '../assets/weather.jpg';
 
 interface ApodData {
     date: string;
@@ -17,12 +19,8 @@ const DashboardPage = () => {
     useEffect(() => {
         const fetchApodData = async () => {
             try {
-                // Fetch the APOD data from the API (backend)
                 const response = await fetchAstronomyPicture();
-
-                // Check the structure of the response; it should be an object
                 console.log('Fetched APOD data:', response);
-
                 setApodData(response);
             } catch (error: any) {
                 setError(error.message || 'Error fetching APOD data');
@@ -32,21 +30,37 @@ const DashboardPage = () => {
         };
 
         fetchApodData();
-    }, []); // Only fetch once on component mount
+    }, []);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
 
     return (
         <div className="dashboard">
-            <h1>Astronomy Picture of the Day</h1>
+            <div className="left-pane">
+                <div className="dashboard-traffic">
+                    <h3>Traffic</h3>
+                    <p>Add details here.</p>
+                    <a href="/traffic" target="_self">
+                        <img src={trafficImage} alt="Traffic" />
+                    </a>
+                </div>
+                <div className="dashboard-weather">
+                    <h3>Weather</h3>
+                    <p>Add details here.</p>
+                    <a href="/weather" target="_self">
+                        <img src={weatherImage} alt="Weather" />
+                    </a>
+                </div>
+            </div>
             {apodData && (
                 <div className="apod-container">
-                    <h2>{apodData.title}</h2>
+                    <h1>Astronomy Picture of the Day</h1>
+                    <p><strong>Title:</strong> {apodData.title}</p>
                     <p><strong>Date:</strong> {apodData.date}</p>
                     <p>{apodData.explanation}</p>
                     <img
-                        src={apodData.url || 'https://via.placeholder.com/800x600'}  // Fallback image
+                        src={apodData.url || 'https://via.placeholder.com/800x600'}
                         alt={apodData.title}
                         style={{ maxWidth: '100%', height: 'auto', borderRadius: '10px' }}
                     />
