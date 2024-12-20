@@ -8,14 +8,14 @@ export const fetchWeatherEvents = async (
     console.log('API URL:', apiUrl); // Log the URL to check if it's correct
 
     const response = await fetch(apiUrl);
-    
+
     if (!response.ok) {
       throw new Error(`Failed to fetch weather events: ${response.statusText}`);
     }
 
     const data = await response.json();
     console.log('Data from NASA API:', data);
-    
+
     // Check if the data is empty
     if (data.length === 0) {
       throw new Error('No weather events found for the given parameters');
