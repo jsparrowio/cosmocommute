@@ -3,7 +3,8 @@ import {
   getAllUsers,
   getUserById,
   createUser,
-  updateUser,
+  updateUserProfile,
+  updateUserPassword,
   deleteUser,
 } from '../../controllers/user-controller.js';
 
@@ -19,7 +20,10 @@ router.get('/:id', getUserById);
 router.post('/', createUser);
 
 // PUT /users/:id - Update a user by id
-router.put('/:id', updateUser);
+router.put('/profile/:id', updateUserProfile);
+
+// PUT /users/:id - Update a user by id
+router.put('/password/:id', updateUserPassword);
 
 // DELETE /users/:id - Delete a user by id
 router.delete('/:id', deleteUser);
