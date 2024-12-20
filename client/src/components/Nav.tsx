@@ -14,7 +14,6 @@ const Nav: React.FC = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-    const isHomePage = location.pathname === "/";
 
     const homeLinks: Route[] = [
         { path: '/', label: "Home" },
@@ -23,8 +22,7 @@ const Nav: React.FC = () => {
 
     const dashboardLinks: Route[] = [
         { path: '/Dashboard', label: "Dashboard" },
-        { path: '/Traffic', label: "Traffic" },
-        { path: '/Weather', label: "Weather" },
+        { path: '/Logout', label: "Logout" },
 
     ];
 
@@ -33,47 +31,28 @@ const Nav: React.FC = () => {
         navigate("/Dashboard");
     }
 
+    const handleLogout = (): void => {
+        setIsLoggedIn(false);
+        navigate("/");
+    }
+
+    const navLinks: Route[] = isLoggedIn ? dashboardLinks : homeLinks;
+
     return (
         <nav>
-            <ul>
-                {(location.pathname === "/" || location.pathname === "/Login") && !isLoggedIn
-                    ? homeLinks.map((route: Route) => (
-                        <li key={route.path}>
-                            <NavLink
-                                to={route.path}
-                                className={({ isActive }) =>
-                                    isActive ? "active" : ""
-                                }
-                            >
-                                {route.label}
-                            </NavLink>
-                        </li>
-                    ))
-                    : dashboardLinks.map((route: Route) => (
-                        <li key={route.path}>
-                            <NavLink
-                                to={route.path}
-                                className={({ isActive }) =>
-                                    isActive ? "active" : ""
-                                }
-                            >
-                                {route.label}
-                            </NavLink>
-                        </li>
-                    ))}
-            </ul>
+            <Space>
+                {navLinks.map((route: Route) => (
+                    <Button
+                        key={route.path}
+                        type="primary"
+                        onClick={() =>
+                            route.label === "Logout" ? handleLogout() : navigate(route.path)
+                        }
+                    >
+                        {route.label}
+                    </Button>
 
-            <Space style={{ marginTop: "10px", float: "right" }}>
-                {!isLoggedIn && location.pathname === "/Login" && (
-                    <Button type="primary" onClick={handleLogin}>
-                        Login
-                    </Button>
-                )}
-                {isLoggedIn && (
-                    <Button type="default" onClick={() => setIsLoggedIn(false)}>
-                        Logout
-                    </Button>
-                )}
+                ))}
             </Space>
         </nav>
     );
