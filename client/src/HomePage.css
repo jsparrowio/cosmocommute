@@ -1,0 +1,37 @@
+.homepage {
+    line-height: normal;
+    padding: 2rem;
+    color: #333;
+}
+
+.apod-container {
+    max-width: 1200px;
+    margin: 2rem 0 2rem 0; /* Remove the auto margin from the right */
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f0f8ff; /* Light blue color */
+    margin-left: auto;  /* Align to the right */
+    margin-right: 0; /* Ensure no margin on the right */
+}
+
+.apod-container h2 {
+    font-size: 2rem;          /* Make the heading larger */
+    font-weight: bold;        /* Make the heading bold */
+    line-height: 1.5;         /* Adjust line height for better readability */
+    margin-bottom: 1rem;      /* Space between the heading and the content */
+}
+
+.apod-container p {
+    font-size: 1rem;          /* Regular text size for the description */
+    line-height: 1.8;         /* Increase line-height */
+    margin-bottom: 1.5rem;    /* Add space after the paragraph */
+    text-align: justify;      /* Justify text for better readability */
+}
+
+.apod-container img {
+    max-width: 100%;           /* Make the image responsive */
+    height: auto;              /* Maintain aspect ratio */
+    border-radius: 8px;        /* Rounded corners for the image */
+    margin-bottom: 1.5rem;     /* Add space between the image and text */
+}

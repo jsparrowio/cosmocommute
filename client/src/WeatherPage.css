@@ -1,0 +1,35 @@
+.weather-event {
+    text-align: center;
+    line-height: normal;
+    padding: 2rem;
+    color: #333;
+  }
+  
+  .weather-event-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f0f8ff; /* Light blue color */
+  }
+  
+  .weather-event h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  .weather-event p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .error {
+    color: red;
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+  

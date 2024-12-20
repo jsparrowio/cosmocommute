@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import fetch from 'node-fetch'; 
+import fetch from 'node-fetch';
 
 dotenv.config();
 
@@ -56,7 +56,7 @@ router.get('/', async (req: Request, res: Response) => {
     }
 
     // Send the data to the frontend
-    return res.json(data); 
+    return res.json(data);
   } catch (error: any) {
     console.error('Error in NASA DONKI API call:', error.message);
     return res.status(500).json({ error: 'Failed to fetch weather events data' });
