@@ -6,11 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
-import WeatherPage from './pages/WeatherPage';
-import TrafficPage from './pages/TrafficPage';
 import Nav from './components/Nav';
 import { Layout } from 'antd'
-import { Button, } from 'antd';
 
 // function to render entire React single page application
 const { Header, Footer, Sider, Content } = Layout;
@@ -64,8 +61,6 @@ const App: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/Login" element={<LoginPage />} />
             <Route path="/Dashboard" element={<DashboardPage />} />
-            <Route path="/Weather" element={<WeatherPage />} />
-            <Route path="/Traffic" element={<TrafficPage />} />
           </Routes>
         </Content>
         <Footer style = {footerStyle}>

@@ -1,9 +1,9 @@
 import React from 'react';
 
-const HomePage: React.FC = () => {
+const HomePage: React.FC =() => {
     return (
         <div>
-            <h1>Home Page</h1>
+           <p>home page</p> 
         </div>
     )
 };
