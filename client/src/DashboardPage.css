@@ -11,7 +11,7 @@
 
 .apod-container {
     flex: 2;
-    max-width: 1300px;
+    max-width: 13200px;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -70,7 +70,7 @@
     line-height: 1.5;
     max-width: 500px; /* Set a max width to make them smaller */
     font-size: large;
-    margin: 0 auto; /* Center the containers horizontally */
+    margin-top: 2rem;
 }
 
 .dashboard-traffic:hover,
@@ -107,7 +107,7 @@
     font-size: 2rem;
     font-weight: bold;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    margin: auto;
+    margin-top: 2rem;
 }
 
 .settings-button:hover {

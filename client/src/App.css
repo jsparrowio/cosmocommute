@@ -41,7 +41,7 @@ nav .ant-btn {
     padding: 20px;
     border-radius: 10px;
     margin-left: 300px;
-    background-color: #1C3B5A;
+    background-color: #f0f8ff;
     margin-top: 40px;
 }
 
@@ -52,11 +52,11 @@ nav .ant-btn {
     gap: 50px;
     margin-right: 300px;
     text-decoration: none;
+    color: #333;
 }
 
 .testimonialright {
-
-    background: #1C3B5A;
+    background: #f0f8ff;
     border-radius: 10px;
     max-width: 40%;
     font-style: italic;
