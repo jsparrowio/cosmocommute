@@ -61,6 +61,18 @@
     height: 100%; /* Fill the available height */
 }
 
+.dashboard-user {
+    text-align: center;
+    background-color: #f0f8ff;
+    padding: 1rem;
+    border-radius: 10px;
+    line-height: 1.5;
+    max-width: 100%; /* Set a max width to make them smaller */
+    min-width: 500px;
+    font-size: large;
+    margin: 0 auto; /* Center the containers horizontally */
+}
+
 .dashboard-traffic,
 .dashboard-weather {
     text-align: center;
@@ -74,7 +86,8 @@
 }
 
 .dashboard-traffic:hover,
-.dashboard-weather:hover {
+.dashboard-weather:hover,
+.dashboard-user:hover {
     transform: scale(1.05); /* Slightly enlarge on hover */
     box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
 }
@@ -151,6 +164,10 @@
     .dashboard-weather {
         max-width: 90%; /* Make traffic and weather containers take up more width */
     }
+
+    .dashboard-user {
+        min-width: 90%;
+    }
 }
 
 /* For mobile screens */
@@ -172,5 +189,9 @@
     .dashboard-traffic,
     .dashboard-weather {
         max-width: 100%; /* Ensure traffic and weather containers take full width */
+    }
+
+    .dashboard-user {
+        min-width: 100%;
     }
 }
