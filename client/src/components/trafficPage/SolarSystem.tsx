@@ -59,7 +59,7 @@ export default function SolarSystem({ startPlanet }: SolarSystemProps) {
       >
         {isOrbiting ? "Stop Orbiting" : "Start Orbiting"}
       </button>
-      <Canvas camera={{ position: [0, 10, 30], fov: 45 }} shadows style={{ width: "70vw", height: "60vh", border: "10px solid blue" }}>
+      <Canvas camera={{ position: [0, 10, 30], fov: 45 }} shadows style={{ width: "70vw", height: "60vh", border: "6px solid #1C3B5A" }}>
         <Suspense fallback={null}>
           <SolarSystemContent handlePlanetClick={handlePlanetClick} isOrbiting={isOrbiting} />
           <OrbitControls ref={controlsRef} />
