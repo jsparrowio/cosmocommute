@@ -1,7 +1,7 @@
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import React, { useLayoutEffect, useState } from 'react';
 import { Button, Space } from 'antd'
-
+import Auth from "../utils/auth";
 
 interface Route {
     path: string;
@@ -9,56 +9,50 @@ interface Route {
 }
 
 const Nav: React.FC = () => {
-    const location = useLocation();
     const navigate = useNavigate();
 
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-    const handleLogin = (): void => {
-        setIsLoggedIn(true);
-        navigate("/Dashboard");
-    }
 
-    const handleLogout = (): void => {
-        setIsLoggedIn(false);
-        navigate("/");
-    }
+    useLayoutEffect(() => {
+        const loggedIn = Auth.loggedIn();
+        if (loggedIn === true) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
+    }, []);
 
+
+    const homeLinks: Route[] = [
+        { path: '/', label: "Home" },
+        { path: '/Login', label: "Login" },
+    ];
+
+    const dashboardLinks: Route[] = [
+        { path: '/Dashboard', label: "Dashboard" },
+        { path: '/Redirect', label: "Logout" },
+
+    ];
+
+    const navLinks: Route[] = isLoggedIn ? dashboardLinks : homeLinks;
 
     return (
         <nav>
-            {(location.pathname === '/' || location.pathname === '/Login') && !isLoggedIn && (
-                <Space>
+            <Space>
+                {navLinks.map((route: Route) => (
                     <Button
-                        key="Home"
+                        key={route.path}
                         type="primary"
-                        onClick={() => navigate("/")}
-                    >Home
+                        onClick={() =>
+                            route.label === "Logout" ? Auth.logout() : navigate(route.path)
+                        }
+                    >
+                        {route.label}
                     </Button>
-                    <Button
-                        key="Login"
-                        type="primary"
-                        onClick={() => navigate('/Login')}
-                    >Login
-                    </Button>
-                </Space>
-            )}
-            {location.pathname === '/dashboard' && (
-                <Space>
-                        <Button
-                            key="Dashboard"
-                            type= "primary"
-                            onClick={() => navigate("/Dashboard")}
-                        >Dashboard
-                        </Button>
-                        <Button
-                            key="Logout"
-                            type="default"
-                            onClick={handleLogout}
-                        >Logout
-                        </Button>
-                </Space>
-            )}
+
+                ))}
+            </Space>
         </nav>
     );
 };

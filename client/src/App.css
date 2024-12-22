@@ -2,7 +2,6 @@ nav {
     background-color: #D9EAF7;
     color: #D9EAF7;
     font-size: 20px;
-    min-height: 70px;
 }
 
 nav ul {
@@ -23,14 +22,16 @@ nav .ant-space {
 }
 
 .header-title {
-    float: left;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: row;
     
 }
 
 nav .ant-btn {
     margin-left: 10px;
     background-color: #1C3B5A;
-    color: white;
 }
 
 .space-travel img {
@@ -72,3 +73,20 @@ nav .ant-btn {
     font-size: 20px;
 }
 
+@media (max-width: 600px){
+    .header-title {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .header-title h1 {
+        font-size: 9vw;
+        padding: 0px;
+        margin: 0px;
+        margin-top: -75px;
+    }
+    nav {
+        display: flex;
+        justify-content: center;
+    }
+}

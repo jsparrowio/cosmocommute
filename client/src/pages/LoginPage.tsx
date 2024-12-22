@@ -1,5 +1,5 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-import cosmocommutelogo from "../assets/images/cosmocommutelogo.png"
+import cosmocommutelogo from "../assets/images/cosmocommutev2.png"
 import validator from "validator";
 import { Input, Card, Button, Menu } from 'antd';
 import { ToastContainer, toast, Slide } from 'react-toastify';
@@ -239,7 +239,7 @@ export default function LoginPage() {
                 {current === 'login' &&
                     <form className='form' onSubmit={handleLoginSubmit} style={{ 'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'center', 'alignItems': 'center' }}>
 
-                        <img src={cosmocommutelogo} style={{ 'height': '100px', 'width': '100px' }}></img>
+                        <img src={cosmocommutelogo} style={{ 'height': '150px', 'width': '150px' }}></img>
                         <h2>Login to CosmoCommute</h2>
                         <label>Username</label>
                         <Input
@@ -268,7 +268,7 @@ export default function LoginPage() {
                 {current === 'signup' &&
                     <form className='form' onSubmit={handleSignupSubmit} style={{ 'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'center', 'alignItems': 'center' }}>
 
-                        <img src={cosmocommutelogo} style={{ 'height': '100px', 'width': '100px' }}></img>
+                        <img src={cosmocommutelogo} style={{ 'height': '150px', 'width': '150px' }}></img>
                         <h2>Signup for a CosmoCommute account!</h2>
                         <label>Username</label>
                         <Input
