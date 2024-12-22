@@ -1,20 +1,10 @@
-// import React from 'react';
-
-// const TrafficPage: React.FC =() => {
-//     return (
-//         <div>
-//             <p>traffic</p>
-//         </div>
-//     )
-// };
-
-// export default TrafficPage;
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dropdown from "../components/trafficPage/Dropdown";
 import SolarSystem from "../components/trafficPage/SolarSystem";
 import { planets } from "../data/planets";
 import { travelTimes } from "../data/travelTimes";
+import { Card } from 'antd';
+import Auth from '../utils/auth';
 
 // Define styles using a TypeScript interface
 interface Styles {
@@ -54,28 +44,53 @@ const calculateRoute = (startPlanet: string, endPlanet: string): string => {
 function TrafficPage(): JSX.Element {
   const [startPlanet, setStartPlanet] = useState<string>("");
   const [endPlanet, setEndPlanet] = useState<string>("");
+  const [loginCheck, setLoginCheck] = useState(false);
+
+  useEffect(() => {
+    const loggedIn = Auth.loggedIn();
+    if (loggedIn === true) {
+      setLoginCheck(true);
+    } else {
+      Auth.logout();
+    }
+  }, []);
 
   const planetNames = planets.map((planet) => planet.name);
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>Traffic🌌</h1>
-      <Dropdown
-        label="Starting Planet"
-        options={planetNames}
-        value={startPlanet}
-        onChange={setStartPlanet}
-      />
-      <Dropdown
-        label="Destination Planet"
-        options={planetNames}
-        value={endPlanet}
-        onChange={setEndPlanet}
-      />
-      <div style={styles.resultText}>
-        {calculateRoute(startPlanet, endPlanet)}
-      </div>
-      <SolarSystem startPlanet={startPlanet} />
+    <div style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center', 'margin': '3rem' }}>
+      {loginCheck === true &&
+        <Card bordered={true} style={{ width: 'fit-content', 'backgroundColor': '#D9EAF7' }}>
+          <div style={styles.container}>
+            <h1 style={styles.title}>Traffic🌌</h1>
+            <Dropdown
+              label="Starting Planet"
+              options={planetNames}
+              value={startPlanet}
+              onChange={setStartPlanet}
+            />
+            <Dropdown
+              label="Destination Planet"
+              options={planetNames}
+              value={endPlanet}
+              onChange={setEndPlanet}
+            />
+            <div style={styles.resultText}>
+              {calculateRoute(startPlanet, endPlanet)}
+            </div>
+            <SolarSystem startPlanet={startPlanet} />
+          </div>
+        </Card>
+      }
+      {loginCheck === false &&
+        <Card bordered={true} style={{ width: 300 }}>
+          <p>
+            You must be logged in to view this page!
+            <br />
+            Redirecting...
+          </p>
+        </Card>
+      }
     </div>
   );
 }
