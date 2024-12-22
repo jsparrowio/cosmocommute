@@ -17,13 +17,13 @@ const HomePage: React.FC = () => {
                     </ul>
                 </div>
             </div>
-        
+
             <div className='center1'>
                 <h2> Ready to navigate the stars like a pro? Log in and take off with CosmoCommute!</h2>
             </div>
         </div>
 
-     );
+    );
 };
 
-            export default HomePage;
+export default HomePage;
