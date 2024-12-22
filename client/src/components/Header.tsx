@@ -1,13 +1,13 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import commutevan from '../assets/images/commutevan.png';
+
 
 
 const Header: React.FC = () => {
-    const location = useLocation();
-    const isHomePage = location.pathname === '/';
     return (
         <header>
             <div className="header-title">
+                <img src={commutevan} style={{ 'width': '80px', 'height': '50px', 'marginTop': '0.5rem' }}></img>&nbsp;
                 <h1>CosmoCommute</h1>
             </div>
         </header>

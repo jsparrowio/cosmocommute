@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect, FormEvent, ChangeEvent } from "react";
+import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import validator from "validator";
 import { Input, Card, Button, Menu } from 'antd';
 import { ToastContainer, toast, Slide } from 'react-toastify';
@@ -68,31 +68,18 @@ const showSuccess = (msg: string) => {
         });
 }
 
-const redirect = () => {
-    window.location.assign('/login');
-}
-
 export default function UserSettingsPage() {
 
     const [loginCheck, setLoginCheck] = useState(false);
-
-    useLayoutEffect(() => {
-        const loggedIn = Auth.loggedIn();
-        if (loggedIn === true) {
-            setLoginCheck(true);
-        } else {
-            redirect();
-        }
-    }, []);
 
     useEffect(() => {
         const loggedIn = Auth.loggedIn();
         if (loggedIn === true) {
             setLoginCheck(true);
         } else {
-            redirect();
+            Auth.logout();
         }
-    }, [loginCheck]);
+    }, []);
 
     const [usernameBlur, setUsernameBlur] = useState(false);
     const [firstNameBlur, setFirstNameBlur] = useState(false);
@@ -188,6 +175,14 @@ export default function UserSettingsPage() {
         }
         try {
             await updateUserPassword(passwordData);
+            console.log('Password update success!');
+            showSuccess('Password updated successfully!');
+            setPasswordData({
+                id: activeUser.userData.id,
+                currentPassword: '',
+                password: ''
+            });
+            setPasswordConfirm('');
         } catch (err) {
             console.error('Failed to change password;', err);
             if (err === 401) {
@@ -264,7 +259,7 @@ export default function UserSettingsPage() {
         try {
             await updateUserProfile(profileData);
             console.log('Profile update success!');
-            showSuccess('Profile update success!');
+            showSuccess('Profile updated successfully!');
             const newUserInfo = {
                 exp: activeUser.exp,
                 iat: activeUser.iat,
