@@ -59,7 +59,7 @@ function TrafficPage(): JSX.Element {
 
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>CosmoCommute 🌌</h1>
+      <h1 style={styles.title}>Traffic🌌</h1>
       <Dropdown
         label="Starting Planet"
         options={planetNames}
