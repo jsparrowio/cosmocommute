@@ -14,18 +14,6 @@ const Nav: React.FC = () => {
 
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-
-    const homeLinks: Route[] = [
-        { path: '/', label: "Home" },
-        { path: '/Login', label: "Login" },
-    ];
-
-    const dashboardLinks: Route[] = [
-        { path: '/Dashboard', label: "Dashboard" },
-        { path: '/Logout', label: "Logout" },
-
-    ];
-
     const handleLogin = (): void => {
         setIsLoggedIn(true);
         navigate("/Dashboard");
@@ -36,24 +24,41 @@ const Nav: React.FC = () => {
         navigate("/");
     }
 
-    const navLinks: Route[] = isLoggedIn ? dashboardLinks : homeLinks;
 
     return (
         <nav>
-            <Space>
-                {navLinks.map((route: Route) => (
+            {(location.pathname === '/' || location.pathname === '/Login') && !isLoggedIn && (
+                <Space>
                     <Button
-                        key={route.path}
+                        key="Home"
                         type="primary"
-                        onClick={() =>
-                            route.label === "Logout" ? handleLogout() : navigate(route.path)
-                        }
-                    >
-                        {route.label}
+                        onClick={() => navigate("/")}
+                    >Home
                     </Button>
-
-                ))}
-            </Space>
+                    <Button
+                        key="Login"
+                        type="primary"
+                        onClick={() => navigate('/Login')}
+                    >Login
+                    </Button>
+                </Space>
+            )}
+            {location.pathname === '/dashboard' && (
+                <Space>
+                        <Button
+                            key="Dashboard"
+                            type= "primary"
+                            onClick={() => navigate("/Dashboard")}
+                        >Dashboard
+                        </Button>
+                        <Button
+                            key="Logout"
+                            type="default"
+                            onClick={handleLogout}
+                        >Logout
+                        </Button>
+                </Space>
+            )}
         </nav>
     );
 };

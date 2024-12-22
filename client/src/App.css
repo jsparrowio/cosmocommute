@@ -2,6 +2,7 @@ nav {
     background-color: #D9EAF7;
     color: #D9EAF7;
     font-size: 20px;
+    min-height: 70px;
 }
 
 nav ul {
@@ -29,4 +30,5 @@ nav .ant-space {
 nav .ant-btn {
     margin-left: 10px;
     background-color: #1C3B5A;
+    color: white;
 }
