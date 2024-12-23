@@ -6,12 +6,10 @@ import trafficImage from '../assets/traffic.jpg';
 import weatherImage from '../assets/weather.jpg';
 import { SettingOutlined, LoadingOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import getActiveUser from '../components/ActiveUser';
 import Auth from '../utils/auth';
 import { Card, Space } from 'antd'
 import cosmocommutelogo from "../assets/images/commutevan.png"
-
-const activeUser = getActiveUser();
+import { retrieveUserInfo } from '../apis/userAPI';
 
 interface ApodData {
     date: string;
@@ -27,10 +25,12 @@ const DashboardPage = () => {
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
     const navigate = useNavigate();
+    const [userFirstName, setUserFirstName] = useState<string>('');
 
     useEffect(() => {
         const loggedIn = Auth.loggedIn();
         if (loggedIn === true) {
+            const profile = Auth.getProfile();
             setInit(false);
             setLoginCheck(true);
             setLoading(true);
@@ -45,6 +45,18 @@ const DashboardPage = () => {
                     setLoading(false);
                 }
             };
+            const setUserData = async () => {
+                try {
+                    const response = await retrieveUserInfo(profile.userData.id!);
+                    console.log('retrieved profile:', response)
+                    setUserFirstName(response.first_name);
+                    setLoading(false);
+                } catch (err: any) {
+                    console.log('profile retrieve error:', err);
+                    setError(err.message);
+                }
+            };
+            setUserData();
             fetchApodData();
         }
         else {
@@ -94,7 +106,7 @@ const DashboardPage = () => {
                     <div className="right-pane">
                         <div className="dashboard-user">
                             <img src={cosmocommutelogo} style={{ 'height': '100px', 'width': '150px' }}></img>
-                            <h2 style={{ 'marginTop': '-1rem' }}>Welcome, {activeUser.userData.first_name}!</h2>
+                            <h2 style={{ 'marginTop': '-1rem' }}>Welcome, {userFirstName}!</h2>
                             <Space>
                                 <Link to='/UserSettings'>
                                     <button className="settings-button">
