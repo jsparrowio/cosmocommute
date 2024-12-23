@@ -1,0 +1,197 @@
+/* HomePage.css */
+.home-container {
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    background-color: #f0f8ff;
+    border-radius: 15px;
+    padding: 10px;
+    max-width: 800px;
+}
+
+.hero-image {
+    max-width: 100%;
+    border-radius: 15px;
+}
+
+.hero-content {
+    text-align: center;
+    margin: 0;
+    line-height: 1.5;
+    padding: 10px 20px;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: white; 
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    background-color: #232946;
+    color: #e0e0e0; 
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: left;
+}
+
+.testimonials-section h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.testimonials-list {
+    list-style-type: none;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.testimonials-list li {
+    margin-bottom: 10px;
+}
+
+/* Call-to-Action Section */
+.cta-section {
+    background-color: #4e4c67;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cta-section h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.cta-section button {
+    background-color: #ff5722;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.cta-section button:hover {
+    background-color: #e64a19;
+}
+
+/* Responsive Design */
+
+/* Medium Screens (Tablets) */
+@media (max-width: 768px) {
+    .hero-section {
+        flex-direction: column;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+
+    .image-container {
+        max-width: 90%;
+    }
+
+    .testimonials-section {
+        padding: 15px;
+    }
+
+    .testimonials-section h3 {
+        font-size: 1.6rem;
+    }
+
+    .cta-section {
+        padding: 15px;
+    }
+
+    .cta-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .cta-section p {
+        font-size: 1rem;
+    }
+
+    .cta-section button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+/* Small Screens (Mobile) */
+@media (max-width: 480px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+
+    .hero-section p {
+        font-size: 0.9rem;
+    }
+
+    .image-container {
+        padding: 8px;
+    }
+
+    .testimonials-section {
+        padding: 10px;
+    }
+
+    .testimonials-section h3 {
+        font-size: 1.4rem;
+    }
+
+    .cta-section {
+        padding: 10px;
+    }
+
+    .cta-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .cta-section p {
+        font-size: 0.9rem;
+    }
+
+    .cta-section button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+}
