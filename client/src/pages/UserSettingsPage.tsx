@@ -4,15 +4,12 @@ import validator from "validator";
 import { Input, Card, Button, Menu } from 'antd';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import Auth from '../utils/auth';
-import { updateUserProfile } from "../apis/userAPI";
-import { updateUserPassword } from "../apis/userAPI";
-import getActiveUser from "../components/ActiveUser";
-import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone, MailOutlined, LockOutlined, RobotOutlined, TeamOutlined, ProfileOutlined } from '@ant-design/icons';
+import { updateUserProfile, updateUserPassword, retrieveUserInfo } from "../apis/userAPI";
+import { UserOutlined, EyeInvisibleOutlined, EyeTwoTone, MailOutlined, LockOutlined, RobotOutlined, TeamOutlined, ProfileOutlined, LoadingOutlined } from '@ant-design/icons';
 import type { UserProfile } from "../interfaces/UserProfile";
 import type { UserPassword } from "../interfaces/UserPassword";
 import type { MenuProps } from 'antd';
-
-const activeUser = getActiveUser();
+import { UserData } from "../interfaces/UserData";
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -70,19 +67,70 @@ const showSuccess = (msg: string) => {
 }
 
 export default function UserSettingsPage() {
-
+    const [init, setInit] = useState(true);
     const [loginCheck, setLoginCheck] = useState(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string>('');
     const navigate = useNavigate();
+    const [activeUser, setActiveUser] = useState<UserData>({
+        exp: 0,
+        iat: 0,
+        userData: {
+            id: 0,
+            username: '',
+            first_name: '',
+            last_name: '',
+            email: ''
+        }
+    });
+    const [initialProfileData, setInitialProfileData] = useState<UserProfile>({
+        id: null,
+        username: null,
+        first_name: null,
+        last_name: null,
+        email: null,
+        createdAt: null,
+        updatedAt: null
+    });
+    const [profileData, setProfileData] = useState<UserProfile>({
+        id: null,
+        username: null,
+        first_name: null,
+        last_name: null,
+        email: null,
+        createdAt: null,
+        updatedAt: null
+    });
 
     useEffect(() => {
         const loggedIn = Auth.loggedIn();
         if (loggedIn === true) {
+            const profile = Auth.getProfile();
+            setInit(false);
+            setActiveUser(profile);
             setLoginCheck(true);
+            setLoading(true);
+            const setUserData = async () => {
+                try {
+                    const response = await retrieveUserInfo(profile.userData.id!);
+                    console.log('retrieved profile:', response)
+                    setInitialProfileData(response);
+                    setProfileData(response);
+                    setEmailConfirm(response.email);
+                    setLoading(false);
+                } catch (err: any) {
+                    console.log('profile retrieve error:', err);
+                    setError(err.message);
+                }
+            };
+            setUserData();
         } else {
+            setInit(false);
             Auth.logout();
             navigate('/Login');
         }
     }, []);
+
 
     const [usernameBlur, setUsernameBlur] = useState(false);
     const [firstNameBlur, setFirstNameBlur] = useState(false);
@@ -132,16 +180,8 @@ export default function UserSettingsPage() {
         password: ''
     });
 
-    const [profileData, setProfileData] = useState<UserProfile>({
-        id: activeUser.userData.id,
-        username: activeUser.userData.username,
-        first_name: activeUser.userData.first_name,
-        last_name: activeUser.userData.last_name,
-        email: activeUser.userData.email,
-    });
-
     const [passwordConfirm, setPasswordConfirm] = useState<string>('');
-    const [emailConfirm, setEmailConfirm] = useState<string>(activeUser.userData.email);
+    const [emailConfirm, setEmailConfirm] = useState<string | null>('');
 
     // const checkCurrentEmail = () => {
     //     if (emailConfirm === '' || emailConfirm !== activeUser.userData.email) {
@@ -212,7 +252,7 @@ export default function UserSettingsPage() {
 
     const handleProfileChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        name === 'email' && profileData.email !== activeUser.userData.email ? setEmailConfirm('') : setEmailConfirm(activeUser.userData.email);
+        name === 'email' && profileData.email !== initialProfileData.email ? setEmailConfirm('') : setEmailConfirm(profileData.email);
         setProfileData({
             ...profileData,
             [name]: value
@@ -288,6 +328,22 @@ export default function UserSettingsPage() {
             }
         }
     };
+    if (loading) return (
+        <div style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center', 'margin': '3rem' }}>
+            <Card bordered={true} style={{ width: 300 }}>
+                <p>
+                    <LoadingOutlined /> Loading...
+                </p>
+            </Card>
+        </div>
+    )
+    if (error) return (
+        <div style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center', 'margin': '3rem' }}>
+            <Card bordered={true} style={{ width: 300 }}>
+                <p>Loading error: {error}</p>
+            </Card>
+        </div>
+    )
     return (
         <div style={{ 'display': 'flex', 'justifyContent': 'center', 'alignItems': 'center', 'margin': '3rem' }}>
 
@@ -415,7 +471,7 @@ export default function UserSettingsPage() {
                             </form>}
                     </>
                 }
-                {loginCheck === false &&
+                {loginCheck === false && init === false &&
                     <div>
                         <p>
                             You must be logged in to view this page!

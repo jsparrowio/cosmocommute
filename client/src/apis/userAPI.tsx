@@ -26,6 +26,28 @@ const retrieveUsers = async () => {
   }
 }
 
+const retrieveUserInfo = async (id: number) => {
+  try {
+    const response = await fetch(`/api/users/${id}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Auth.getToken()}`
+      }
+    });
+
+    if(!response.ok) {
+      throw new Error('invalid user API response, check network tab!');
+    }
+
+    const data = await response.json();
+    return data;
+
+  } catch (err) { 
+    console.log('Error from data retrieval:', err);
+    return [];
+  }
+}
+
 const updateUserProfile = async (profileData: UserProfile) => {
   try {
     const resp = await fetch(`/api/users/profile/${profileData.id}`, {
@@ -88,4 +110,4 @@ const updateUserPassword = async (passwordData: UserPassword) => {
   }
 }
 
-export { retrieveUsers, updateUserProfile, updateUserPassword };
+export { retrieveUsers, retrieveUserInfo, updateUserProfile, updateUserPassword };
