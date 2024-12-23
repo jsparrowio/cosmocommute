@@ -1,4 +1,5 @@
 import { useState, FormEvent, ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import cosmocommutelogo from "../assets/images/cosmocommutev2.png"
 import validator from "validator";
 import { Input, Card, Button, Menu } from 'antd';
@@ -75,6 +76,7 @@ export default function LoginPage() {
   const [emailConfirmBlur, setEmailConfirmBlur] = useState(false);
   const [passwordBlur, setPasswordBlur] = useState(false);
   const [passwordConfirmBlur, setPasswordConfirmBlur] = useState(false);
+  const navigate = useNavigate();
 
   const handleUsernameBlur = () => {
     signupData.username === '' ? setUsernameBlur(true) : setUsernameBlur(false);
@@ -145,6 +147,7 @@ export default function LoginPage() {
         try {
             const data = await login(loginData);
             Auth.login(data[0].token);
+            navigate('/Dashboard');
         } catch (err) {
             console.error('Failed to login;', err);
             if(err === 401 || err === 403) {

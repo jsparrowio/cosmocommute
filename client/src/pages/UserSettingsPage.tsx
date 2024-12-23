@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent, ChangeEvent } from "react";
+import { useNavigate } from 'react-router-dom';
 import validator from "validator";
 import { Input, Card, Button, Menu } from 'antd';
 import { ToastContainer, toast, Slide } from 'react-toastify';
@@ -71,6 +72,7 @@ const showSuccess = (msg: string) => {
 export default function UserSettingsPage() {
 
     const [loginCheck, setLoginCheck] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loggedIn = Auth.loggedIn();
@@ -78,6 +80,7 @@ export default function UserSettingsPage() {
             setLoginCheck(true);
         } else {
             Auth.logout();
+            navigate('/Login');
         }
     }, []);
 

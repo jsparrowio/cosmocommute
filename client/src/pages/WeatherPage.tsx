@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchWeatherEvents } from '../apis/weatherAPI';
 import solarFlareImage from '../assets/solar-flare.jpg';
 import Auth from '../utils/auth';
@@ -20,6 +21,7 @@ const WeatherPage = () => {
   const [events, setEvents] = useState<WeatherEvent[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loggedIn = Auth.loggedIn();
@@ -44,6 +46,7 @@ const WeatherPage = () => {
     } else {
       setInit(false);
       Auth.logout();
+      navigate('/Login');
     }
   }, []);
   // Function to get the most recent event for each event type

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import React, { useLayoutEffect, useState } from 'react';
 import { Button, Space } from 'antd'
 import Auth from "../utils/auth";
@@ -10,6 +10,7 @@ interface Route {
 
 const Nav: React.FC = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
@@ -21,7 +22,7 @@ const Nav: React.FC = () => {
         } else {
             setIsLoggedIn(false);
         }
-    }, []);
+    }, [location]);
 
 
     const homeLinks: Route[] = [
@@ -31,9 +32,15 @@ const Nav: React.FC = () => {
 
     const dashboardLinks: Route[] = [
         { path: '/Dashboard', label: "Dashboard" },
-        { path: '/Redirect', label: "Logout" },
+        { path: '/Login', label: "Logout" },
 
     ];
+
+    const logout = () => {
+        Auth.logout();
+        setIsLoggedIn(false);
+        navigate('/Login');
+    }
 
     const navLinks: Route[] = isLoggedIn ? dashboardLinks : homeLinks;
 
@@ -45,7 +52,7 @@ const Nav: React.FC = () => {
                         key={route.path}
                         type="primary"
                         onClick={() =>
-                            route.label === "Logout" ? Auth.logout() : navigate(route.path)
+                            route.label === "Logout" ? logout() : navigate(route.path)
                         }
                     >
                         {route.label}

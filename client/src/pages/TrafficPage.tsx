@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Dropdown from "../components/trafficPage/Dropdown";
 import SolarSystem from "../components/trafficPage/SolarSystem";
 import { planets } from "../data/planets";
@@ -42,9 +43,8 @@ const calculateRoute = (startPlanet: string, endPlanet: string): string => {
 };
 
 function TrafficPage(): JSX.Element {
-  const [startPlanet, setStartPlanet] = useState<string>("");
-  const [endPlanet, setEndPlanet] = useState<string>("");
   const [loginCheck, setLoginCheck] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loggedIn = Auth.loggedIn();
@@ -52,8 +52,12 @@ function TrafficPage(): JSX.Element {
       setLoginCheck(true);
     } else {
       Auth.logout();
+      navigate('/Login');
     }
   }, []);
+
+  const [startPlanet, setStartPlanet] = useState<string>("");
+  const [endPlanet, setEndPlanet] = useState<string>("");
 
   const planetNames = planets.map((planet) => planet.name);
 

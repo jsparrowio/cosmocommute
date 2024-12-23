@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchAstronomyPicture } from '../apis/apodAPI';
 import '../DashboardPage.css';
 import trafficImage from '../assets/traffic.jpg';
@@ -25,6 +26,7 @@ const DashboardPage = () => {
     const [apodData, setApodData] = useState<ApodData | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loggedIn = Auth.loggedIn();
@@ -48,6 +50,7 @@ const DashboardPage = () => {
         else {
             setInit(false);
             Auth.logout();
+            navigate('/Login');
         }
     }, []);
 
@@ -103,17 +106,17 @@ const DashboardPage = () => {
                         </div>
                         <div className="dashboard-traffic">
                             <h3>Traffic</h3>
-                            <a href="/traffic" target="_self" rel="noopener noreferrer">
+                            <Link to='/Traffic'>
                                 <img src={trafficImage} alt="Traffic" />
                                 <span>Click to check traffic</span>
-                            </a>
+                            </Link>
                         </div>
                         <div className="dashboard-weather">
                             <h3>Weather Events</h3>
-                            <a href="/weather" target="_self">
+                            <Link to='/Weather'>
                                 <img src={weatherImage} alt="Weather" />
                                 <span>Click to view recent weather events</span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>
